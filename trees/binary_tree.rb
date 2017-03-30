@@ -71,6 +71,32 @@ class BinaryTree
     arr
   end
 
+  def to_vertical_a
+    return [] if empty?
+
+    queue = LQueue.new
+    h = {}
+    min_l = 0
+    max_l = 0
+
+    queue.enqueue([0, @root])
+
+    until queue.empty?
+      level, node = queue.dequeue.value
+
+      min_l = [min_l, level].min
+      max_l = [max_l, level].max
+
+      h[level] ||= []
+      h[level] << node.data
+
+      queue.enqueue([(level - 1), node.left]) if node.left
+      queue.enqueue([(level + 1), node.right]) if node.right
+    end
+
+    self.class.merge_results(h, min_l, max_l)
+  end
+
   private
 
   def create_from_array(items)
@@ -101,6 +127,13 @@ class BinaryTree
     postorder(node.left, arr)
     postorder(node.right, arr)
     arr << node.data
+    arr
+  end
+
+  def self.merge_results(h, min_l, max_l)
+    arr = []
+    min_l.upto(max_l) { |i| arr += h[i] if h[i] }
+
     arr
   end
 end
