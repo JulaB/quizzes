@@ -55,6 +55,22 @@ class BinaryTree
     self.class.postorder(@root, [])
   end
 
+  def to_level_a
+    arr = []
+    current = @root
+    queue = LQueue.new
+
+    while current
+      arr << current.data
+      queue.enqueue(current.left) if current.left
+      queue.enqueue(current.right) if current.right
+
+      data = queue.dequeue
+      current = data ? data.value : nil
+    end
+    arr
+  end
+
   private
 
   def create_from_array(items)
