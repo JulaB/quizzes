@@ -20,6 +20,34 @@ class BSTree
     @root = self.class.build_from_sorted(arr, 0, arr.length - 1)
   end
 
+  def build_from_preorder_a(arr = [])
+    return if arr.empty?
+
+    node = Node.new(arr[0])
+    @root = node
+    stack = []
+    stack.push(node)
+    len = arr.size
+    nxt = 1
+
+    while nxt < len
+      node = Node.new(arr[nxt])
+      top = stack.last
+      if top && top.data > arr[nxt]
+        top.left = node
+      else
+        while top && top.data < arr[nxt] && !stack.empty?
+          item = stack.pop
+          top = stack.last
+        end
+        item.right = node if item
+      end
+      nxt += 1
+      stack.push(node)
+    end
+
+  end
+
   def empty?
     @root.nil?
   end
