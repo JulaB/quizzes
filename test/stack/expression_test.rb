@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'expression'
+
+require_relative '../test_helper'
+require 'stack/expression'
 
 describe Expression do
   it 'raises error if string is empty' do
@@ -36,7 +36,7 @@ describe Expression do
 
   it 'evaluates expression' do
     expr = '1 + (2 - 3) * 4 + 5 - 6 * 8 - (18 * 12 * 13) - (11 / (5 + 2 + 4)) '
-    assert_equal -2855, Expression.new(expr).evaluate
+    assert_equal(-2855, Expression.new(expr).evaluate)
   end
 
   it 'evaluates expression' do

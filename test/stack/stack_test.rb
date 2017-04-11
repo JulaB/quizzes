@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'stack'
+require_relative '../test_helper'
+require 'stack/stack'
 
 describe Stack do
   describe '#empty?' do

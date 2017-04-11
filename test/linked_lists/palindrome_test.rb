@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'palindrome'
+require_relative '../test_helper'
+require 'linked_lists/palindrome'
 
 describe SinglyLListP do
   let(:l) { SinglyLListP.new }

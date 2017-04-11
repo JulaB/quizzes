@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'binary_tree'
+require_relative '../test_helper'
+require 'trees/binary_tree'
 
 describe BinaryTree do
   describe 'preorder travelsal' do

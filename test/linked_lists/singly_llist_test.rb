@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-
-require_relative 'singly_llist'
+require_relative '../test_helper'
+require 'linked_lists/singly_llist'
 
 describe SinglyLList do
   let(:l) { SinglyLList.new }

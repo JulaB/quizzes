@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'stack_from_queues'
+require_relative '../test_helper'
+require 'stack/stack_from_queues'
 
 describe StackFromQueues do
   let(:s) { StackFromQueues.new }

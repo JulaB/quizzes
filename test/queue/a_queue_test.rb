@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'a_queue'
+require_relative '../test_helper'
+require 'queue/a_queue'
 
 describe AQueue do
   let(:q) { AQueue.new(4) }

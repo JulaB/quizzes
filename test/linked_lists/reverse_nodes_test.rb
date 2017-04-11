@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'reverse_nodes'
+require_relative '../test_helper'
+require 'linked_lists/reverse_nodes'
 
 describe ReverseNode do
   let(:l) { ReverseNode.new }

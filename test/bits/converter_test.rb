@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'converter'
+require_relative '../test_helper'
+require 'bits/converter'
 
 describe Converter do
   describe '.dec2bin' do

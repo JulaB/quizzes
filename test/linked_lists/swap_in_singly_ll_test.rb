@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'swap_in_singly_ll'
+require_relative '../test_helper'
+require 'linked_lists/swap_in_singly_ll'
 
 describe SwapInSinglyLL do
   let(:l) { SwapInSinglyLL.new }

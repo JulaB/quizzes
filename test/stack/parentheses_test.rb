@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'parentheses'
+
+require_relative '../test_helper'
+require 'stack/parentheses'
 
 describe Parentheses do
   it 'returns true for correct expression' do

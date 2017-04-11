@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'validate_tree'
+require_relative '../test_helper'
+require 'trees/validate_tree'
 
 describe BinaryTreeV do
   it 'returns true for empty tree' do

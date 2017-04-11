@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'invert_binary_tree'
+require_relative '../test_helper'
+require 'trees/invert_binary_tree'
 
 describe BinaryTreeInv do
   it 'inverts empty tree' do

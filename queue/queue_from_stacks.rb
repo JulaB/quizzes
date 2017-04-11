@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require '../stack/stack'
+require_relative '../stack/stack'
 
 # Implement queue using two stacks
 class QueueFromStacks

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'bst'
+require_relative '../test_helper'
+require 'trees/bst'
 
 describe BSTree do
   describe '#build_from_sorted_a' do

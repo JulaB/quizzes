@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative('palindrome')
+require_relative '../test_helper'
+require 'palindrome/palindrome'
 
 class PStringTest < Minitest::Test
-  def test_empty_string
+  def test_empty_string_m
     assert_equal '', PString.new('').longest_palindrome
   end
 
-  def test_longest_palindrome
+  def test_longest_palindrome_m
     assert_equal 'bacbcab', PString.new('BBABCBCAB').longest_palindrome
   end
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-gem 'minitest'
-require 'minitest/autorun'
-require_relative 'palindrome'
+require_relative '../test_helper'
+require 'palindrome/palindrome'
 
 class PStringTest < Minitest::Test
   def test_empty_string

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require '../queue/l_queue'
+require_relative '../queue/l_queue'
 
 class BinaryTree
   class Node
