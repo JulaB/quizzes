@@ -6,7 +6,7 @@ namespace :test do
     t.pattern = 'test/**/*_test.rb'
   end
 
-  dirs = %w(bits linked_lists palindrome queue stack trees)
+  dirs = %w(bits linked_lists palindrome queue stack trees arrays)
   dirs.each do |name|
     Rake::TestTask.new(name) do |t|
       t.libs = ['test', "test/#{name}"]
