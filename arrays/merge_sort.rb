@@ -2,7 +2,7 @@
 
 class Array
   def merge_sort
-    self.class.merge_sort_helper(self, 0, self.length)
+    self.class.merge_sort_helper(self, 0, self.length - 1)
   end
 
   private
