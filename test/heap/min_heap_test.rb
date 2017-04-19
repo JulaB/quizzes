@@ -18,6 +18,14 @@ describe MinHeap do
     assert_equal [5, 6], h.to_a
   end
 
+  it 'deletes min element in one-elemented heap' do
+    h = MinHeap.new
+    h.insert(6)
+    assert_equal 6, h.delete_min
+    assert_equal 0, h.size
+    assert_nil h.min
+  end
+
   it 'builds heap from array' do
     h = MinHeap.new([4, 5, 2, 1, 7, 8, 3, 5, 9, 0])
     assert_equal [0, 1, 2, 4, 5, 8, 3, 5, 9, 7], h.to_a

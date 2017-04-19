@@ -72,6 +72,7 @@ class MinHeap
   end
 
   def heapify_down(i)
+    return if @size < 2
     l = left(i)
     r = right(i)
 
