@@ -19,8 +19,8 @@ class BinaryTree
     create_from_array(items)
   end
 
-  def insert(item)
-    node = Node.new(item)
+  def insert(node)
+    node = Node.new(node) unless node.is_a?(BinaryTree::Node)
 
     @root ||= node
     unless @queue.empty?
@@ -95,6 +95,26 @@ class BinaryTree
     end
 
     self.class.merge_results(h, min_l, max_l)
+  end
+
+  def complete?
+    return true if empty?
+
+    queue = LQueue.new
+    queue.enqueue(@root)
+    last_level = false
+
+    until queue.empty?
+      node = queue.dequeue.value
+
+      return false if node.right && !node.left
+      return false if last_level && (node.left || node.right)
+
+      last_level = true if !node.left && !node.right
+      queue.enqueue(node.left) if node.left
+      queue.enqueue(node.right) if node.right
+    end
+    true
   end
 
   private

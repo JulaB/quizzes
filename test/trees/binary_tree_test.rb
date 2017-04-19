@@ -57,4 +57,28 @@ describe BinaryTree do
       assert_equal [8, 4, 2, 1, 5, 6, 3, 7], b.to_vertical_a
     end
   end
+
+  describe '#complete?' do
+    it 'returns true for complete binary tree' do
+      assert_equal true, BinaryTree.new([1, 2, 3, 4, 5, 6, 7]).complete?
+    end
+
+    it 'returns false for non-complete binary tree' do
+      b = BinaryTree.new
+      node = BinaryTree::Node.new(1, nil, BinaryTree::Node.new(2))
+      b.insert(node)
+
+      assert_equal false, b.complete?
+    end
+
+    it 'returns false for non-complete binary tree' do
+      b = BinaryTree.new
+      node = BinaryTree::Node.new(1)
+      node.left = BinaryTree::Node.new(2)
+      node.right = BinaryTree::Node.new(3, BinaryTree::Node.new(4))
+      b.insert(node)
+
+      assert_equal false, b.complete?
+    end
+  end
 end
