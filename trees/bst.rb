@@ -2,12 +2,13 @@
 
 class BSTree
   class Node
-    attr_accessor :left, :right, :data
+    attr_accessor :left, :right, :parent, :data
 
     def initialize(data)
       @data = data
       @left = nil
       @right = nil
+      @parent = nil
     end
   end
 
@@ -15,9 +16,43 @@ class BSTree
     @root = nil
   end
 
+  def search(key)
+    self.class.search_helper(@root, key)
+  end
+
+  def min
+    self.class.min_helper(@root)
+  end
+
+  def max
+    self.class.max_helper(@root)
+  end
+
+  def successor(node)
+    return self.class.min_helper(node.right) if node.right
+
+    cur = node.parent
+    while cur && node == cur.right
+      node = cur
+      cur = cur.parent
+    end
+    cur
+  end
+
+  def predecessor(node)
+    return self.class.max_helper(node.left) if node.left
+    cur  = node.parent
+    while cur && node == cur.left
+      node = cur
+      cur = cur.parent
+    end
+    cur
+  end
+
   def build_from_sorted_a(arr = [])
     return @root unless arr.is_a?(Array)
     @root = self.class.build_from_sorted(arr, 0, arr.length - 1)
+    self
   end
 
   def build_from_preorder_a(arr = [])
@@ -35,17 +70,21 @@ class BSTree
       top = stack.last
       if top && top.data > arr[nxt]
         top.left = node
+        top.left.parent = top
       else
         while top && top.data < arr[nxt] && !stack.empty?
           item = stack.pop
           top = stack.last
         end
-        item.right = node if item
+        if item
+          item.right = node
+          item.right.parent = item
+        end
       end
       nxt += 1
       stack.push(node)
     end
-
+    self
   end
 
   def empty?
@@ -72,13 +111,46 @@ class BSTree
 
   private
 
+  def self.search_helper(node, key)
+    return node if !node || node.data == key
+    if key < node.data
+      search_helper(node.left, key)
+    else
+      search_helper(node.right, key)
+    end
+  end
+
   def self.build_from_sorted(arr, from, to)
     return if from > to
 
     mid = (to + from) / 2
     node = Node.new(arr[mid])
     node.left = build_from_sorted(arr, from, mid - 1)
+    node.left.parent = node if node.left
+
     node.right = build_from_sorted(arr, mid + 1, to)
+    node.right.parent = node if node.right
     node
+  end
+
+  def self.min_helper(node)
+    res = nil
+    while node
+      res = node
+      node = node.left
+    end
+
+    res
+  end
+
+  def self.max_helper(node)
+    res = nil
+
+    while node
+      res = node
+      node = node.right
+    end
+
+    res
   end
 end
