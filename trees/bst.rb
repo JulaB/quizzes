@@ -49,6 +49,62 @@ class BSTree
     cur
   end
 
+  def insert(data)
+    node = Node.new(data)
+    p_node = nil
+    cur = @root
+
+    while cur
+      p_node = cur
+      if cur.data > data
+        cur = cur.left
+      else
+        cur = cur.right
+      end
+    end
+
+    node.parent = p_node
+    if p_node
+      if p_node.data > data
+        p_node.left = node
+      else
+        p_node.right = node
+      end
+    else
+      @root = node
+    end
+    self
+  end
+
+  def delete(node)
+    return unless node
+    cur_node = node
+    if node.left && node.right
+      cur_node = successor(node)
+      node.data = cur_node.data
+    end
+
+    next_node = if cur_node.left
+                  cur_node.left
+                else
+                  cur_node.right
+                end
+
+    if next_node
+      next_node.parent = cur_node.parent
+    end
+
+    if cur_node.parent
+      if cur_node.parent.left == cur_node
+        cur_node.parent.left = next_node
+      else
+        cur_node.parent.right = next_node
+      end
+    else
+      @root = next_node
+    end
+  end
+
   def build_from_sorted_a(arr = [])
     return @root unless arr.is_a?(Array)
     @root = self.class.build_from_sorted(arr, 0, arr.length - 1)

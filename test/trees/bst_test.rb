@@ -94,4 +94,75 @@ describe BSTree do
     end
   end
 
+  describe '#insert' do
+    it 'inserts new value to left branch BST' do
+      b = BSTree.new.build_from_sorted_a([5, 10, 25])
+      b.insert(6)
+      p_node = b.search(5)
+
+      assert_equal 6, p_node.right.data
+      assert_equal p_node, p_node.right.parent
+      assert_nil p_node.left
+    end
+  end
+
+  describe '#delete' do
+    let(:b) { BSTree.new.insert(10).insert(5).insert(30).insert(20).insert(35).insert(15).insert(40) }
+
+    it 'deletes node without children' do
+      node = b.search(10)
+      assert_equal 5, node.left.data
+      assert_nil node.left.left
+      assert_nil node.left.right
+
+      b.delete(node.left)
+      assert_nil node.left
+    end
+
+    it 'deletes node with one left child' do
+      node = b.search(20)
+      p_node = node.parent
+      assert_equal 15, node.left.data
+      assert_nil node.right
+
+      b.delete(node)
+      assert_equal p_node, node.left.parent
+      assert_equal p_node.left, node.left
+    end
+
+    it 'deletes node with one right child' do
+      node = b.search(35)
+      p_node = node.parent
+      assert_equal 40, node.right.data
+      assert_nil node.left
+
+      b.delete(node)
+      assert_equal p_node.right, node.right
+      assert_equal p_node, node.right.parent
+    end
+
+
+    it 'deletes node with both children' do
+      node = b.search(30)
+      p_node = node.parent
+      r_node = node.right
+      refute_nil node.left
+      refute_nil node.right
+
+      b.delete(node)
+      assert_equal 35, p_node.right.data
+      assert_equal r_node.right, p_node.right.right
+      assert_equal [5, 10, 15, 20, 35, 40], b.to_inorder_a
+    end
+
+    it 'detetes root node' do
+      node = b.search(10)
+      assert_nil node.parent
+
+      b.delete(node)
+      assert_equal 15, node.data
+      assert_equal [5, 15, 20, 30, 35, 40], b.to_inorder_a
+    end
+  end
+
 end
