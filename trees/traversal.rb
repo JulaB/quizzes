@@ -11,6 +11,24 @@ class BinaryTree
     self.class.kth_smallest(@root, KCounter.new(k))
   end
 
+  def preorder_traversal
+    return [] if @root.nil?
+
+    stack = []
+    stack << @root
+
+    res = []
+
+    while !stack.empty?
+      node = stack.pop
+      stack << node.right if node.right
+      stack << node.left if node.left
+
+      res << node.data
+    end
+    res
+  end
+
   private
 
   def self.kth_smallest(root, k)
