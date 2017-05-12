@@ -29,6 +29,32 @@ class BinaryTree
     res
   end
 
+  def postorder_traversal
+    return [] if @root.nil?
+
+    res = []
+    stack = []
+    stack << [@root, false]
+
+    until stack.empty?
+      current, visited = stack.pop
+      if (!current.left && !current.right) || visited
+        res << current.data
+      else
+        stack << [current, true]
+      end
+
+      if current.right && !visited
+        stack << [current.right, false]
+      end
+      if current.left && !visited
+        stack << [current.left, false]
+      end
+    end
+
+    res
+  end
+
   private
 
   def self.kth_smallest(root, k)
