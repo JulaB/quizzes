@@ -43,6 +43,8 @@ class Trie
   private
 
   def search_node(prefix)
+    return nil if prefix.to_s.empty?
+
     node = @root
     prefix.downcase.chars.each do |char|
       return nil unless node.children[char]
